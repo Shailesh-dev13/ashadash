@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>AshaConnect - Patient Register</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <button class="icon-btn back-btn" onclick="history.back()">
+                <span>←</span>
+            </button>
+            <span class="page-title">Patient Register</span>
+        </div>
+        <div class="top-bar-right">
+            <button class="icon-btn" id="notification-btn">
+                <span>🔔</span>
+                <span class="badge">3</span>
+            </button>
+            <button class="icon-btn" id="help-btn">
+                <span>❓</span>
+            </button>
+            <button class="icon-btn" id="language-btn">
+                <span>🌐</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="input-mode-tabs">
+            <button class="tab-btn active" data-mode="text">
+                <span>✏️</span> Text
+            </button>
+            <button class="tab-btn" data-mode="voice">
+                <span>🎤</span> Voice
+            </button>
+            <button class="tab-btn" data-mode="image">
+                <span>📷</span> Image
+            </button>
+        </div>
+
+        <form id="patient-form" class="patient-form">
+            <div class="form-section">
+                <h3>Basic Information</h3>
+                
+                <div class="input-group">
+                    <label>Patient Name *</label>
+                    <input type="text" id="patient-name" required>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Age *</label>
+                        <input type="number" id="patient-age" min="0" max="120" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Gender *</label>
+                        <select id="patient-gender" required>
+                            <option value="">Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Height (cm) *</label>
+                        <input type="number" id="patient-height" step="0.1" min="0" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Weight (kg) *</label>
+                        <input type="number" id="patient-weight" step="0.1" min="0" required>
+                    </div>
+                </div>
+
+                <div class="bmi-display" id="bmi-display" style="display: none;">
+                    <div class="bmi-value">
+                        <span>BMI: </span>
+                        <strong id="bmi-value">-</strong>
+                    </div>
+                    <div class="bmi-category" id="bmi-category"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Family Details</h3>
+                <div class="input-group">
+                    <label>Family Members</label>
+                    <input type="number" id="family-members" min="0">
+                </div>
+                <div class="input-group">
+                    <label>Head of Family</label>
+                    <input type="text" id="head-of-family">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Health Information</h3>
+                <div class="input-group">
+                    <label>Chronic Illness</label>
+                    <input type="text" id="chronic-illness" placeholder="e.g., Diabetes, Hypertension">
+                </div>
+                <div class="input-group">
+                    <label>Allergies</label>
+                    <input type="text" id="allergies" placeholder="e.g., Peanuts, Dust">
+                </div>
+                <div class="input-group">
+                    <label>Pregnancy Month (if applicable)</label>
+                    <input type="number" id="pregnancy-month" min="0" max="9">
+                </div>
+                <div class="input-group">
+                    <label>Last Vaccine Date</label>
+                    <input type="date" id="last-vaccine-date">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Address</h3>
+                <div class="input-group">
+                    <label>Full Address *</label>
+                    <textarea id="patient-address" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Additional Notes</h3>
+                <div class="input-group">
+                    <label>Past Description / Notes</label>
+                    <textarea id="patient-notes" rows="4" placeholder="Any additional information about the patient..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="save-draft-btn">Save Draft</button>
+                <button type="submit" class="btn-primary" id="submit-patient-btn">Register Patient</button>
+            </div>
+        </form>
+
+        <!-- Offline Queue Indicator -->
+        <div class="offline-queue" id="offline-queue" style="display: none;">
+            <div class="queue-info">
+                <span>📤</span>
+                <span id="queue-count">0</span> patient(s) pending sync
+            </div>
+            <button class="btn-link" id="sync-now-btn">Sync Now</button>
+        </div>
+
+        <!-- Voice Input Modal -->
+        <div class="voice-modal" id="voice-modal">
+            <div class="voice-modal-content">
+                <div class="voice-animation">
+                    <div class="pulse-ring"></div>
+                    <div class="mic-icon">🎤</div>
+                </div>
+                <h3>Listening...</h3>
+                <p id="voice-transcript"></p>
+                <button class="btn-secondary" id="stop-voice-btn">Stop</button>
+            </div>
+        </div>
+
+        <!-- Image Upload Modal -->
+        <div class="image-modal" id="image-modal">
+            <div class="image-modal-content">
+                <h3>Upload Patient Report</h3>
+                <div class="image-upload-area" id="image-upload-area">
+                    <input type="file" id="image-input" accept="image/*" style="display: none;">
+                    <label for="image-input" class="upload-label">
+                        <span>📷</span>
+                        <p>Tap to upload image</p>
+                    </label>
+                </div>
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Assistant Sidebar -->
+    <div class="ai-sidebar" id="ai-sidebar">
+        <div class="ai-sidebar-header">
+            <h3>AshaAI Helper</h3>
+            <button class="close-btn" id="close-ai-sidebar">✕</button>
+        </div>
+        <div class="ai-sidebar-messages" id="ai-sidebar-messages">
+            <div class="ai-message ai-bot">
+                <p>I can help you fill the form! Try saying: "Patient name is Rajesh Kumar, age 35, male, height 170 cm, weight 75 kg"</p>
+            </div>
+        </div>
+        <div class="ai-sidebar-input">
+            <button class="voice-input-btn" id="sidebar-voice-btn">🎤</button>
+            <input type="text" id="sidebar-ai-input" placeholder="Ask for help...">
+            <button class="send-btn" id="sidebar-send-btn">➤</button>
+        </div>
+    </div>
+
+    <button class="ai-helper-btn" id="ai-helper-btn">
+        <span>🤖</span> AI Helper
+    </button>
+
+    <script src="js/app.js"></script>
+    <script src="js/patient-register.js"></script>
+    <script src="js/ai-assistant.js"></script>
+    <script src="js/offline-sync.js"></script>
+</body>
+</html>
+

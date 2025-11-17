@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>AshaConnect - Notifications</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <button class="icon-btn back-btn" onclick="history.back()">
+                <span>←</span>
+            </button>
+            <span class="page-title">Notifications</span>
+        </div>
+        <div class="top-bar-right">
+            <button class="icon-btn" id="help-btn">
+                <span>❓</span>
+            </button>
+            <button class="icon-btn" id="language-btn">
+                <span>🌐</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="notifications-list" id="notifications-list">
+            <!-- Notifications will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>
+

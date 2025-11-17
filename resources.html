@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>AshaConnect - Resources</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <button class="icon-btn back-btn" onclick="history.back()">
+                <span>←</span>
+            </button>
+            <span class="page-title">Resources</span>
+        </div>
+        <div class="top-bar-right">
+            <button class="icon-btn" id="notification-btn">
+                <span>🔔</span>
+                <span class="badge">3</span>
+            </button>
+            <button class="icon-btn" id="help-btn">
+                <span>❓</span>
+            </button>
+            <button class="icon-btn" id="language-btn">
+                <span>🌐</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="resources-tabs">
+            <button class="tab-btn active" data-tab="guides">📖 Guides</button>
+            <button class="tab-btn" data-tab="videos">🎥 Videos</button>
+            <button class="tab-btn" data-tab="pdfs">📄 PDFs</button>
+        </div>
+
+        <div class="resources-content">
+            <div id="guides-tab" class="resource-tab active">
+                <div class="resource-list" id="guides-list">
+                    <!-- Guides will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div id="videos-tab" class="resource-tab">
+                <div class="resource-list" id="videos-list">
+                    <!-- Videos will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div id="pdfs-tab" class="resource-tab">
+                <div class="resource-list" id="pdfs-list">
+                    <!-- PDFs will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/resources.js"></script>
+</body>
+</html>
+

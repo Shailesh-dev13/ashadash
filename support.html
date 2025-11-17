@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>AshaConnect - Support</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <button class="icon-btn back-btn" onclick="history.back()">
+                <span>←</span>
+            </button>
+            <span class="page-title">Support</span>
+        </div>
+        <div class="top-bar-right">
+            <button class="icon-btn" id="notification-btn">
+                <span>🔔</span>
+                <span class="badge">3</span>
+            </button>
+            <button class="icon-btn" id="help-btn">
+                <span>❓</span>
+            </button>
+            <button class="icon-btn" id="language-btn">
+                <span>🌐</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="support-cards">
+            <div class="support-card">
+                <div class="card-icon-large">🏥</div>
+                <h3>Contact PHC</h3>
+                <p>Primary Health Centre</p>
+                <div class="contact-info">
+                    <p><strong>Phone:</strong> <a href="tel:+911234567890">+91 123 456 7890</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:phc@example.com">phc@example.com</a></p>
+                    <p><strong>Address:</strong> Main Street, City, State</p>
+                </div>
+                <button class="btn-primary btn-full" id="call-phc-btn">Call PHC</button>
+            </div>
+
+            <div class="support-card">
+                <div class="card-icon-large">🚨</div>
+                <h3>Emergency Hotline</h3>
+                <p>24/7 Emergency Support</p>
+                <div class="contact-info">
+                    <p><strong>Emergency:</strong> <a href="tel:108">108</a></p>
+                    <p><strong>Health Helpline:</strong> <a href="tel:104">104</a></p>
+                </div>
+                <button class="btn-danger btn-full" id="emergency-btn">Emergency Call</button>
+            </div>
+
+            <div class="support-card">
+                <div class="card-icon-large">💬</div>
+                <h3>Chat with PHC Staff</h3>
+                <p>Get instant help from PHC staff</p>
+                <button class="btn-primary btn-full" id="chat-phc-btn">Start Chat</button>
+            </div>
+        </div>
+
+        <!-- AI Chat Modal -->
+        <div class="modal" id="phc-chat-modal">
+            <div class="modal-content chat-modal">
+                <div class="modal-header">
+                    <h3>Chat with PHC Staff (AI Assisted)</h3>
+                    <button class="close-btn" id="close-phc-chat">✕</button>
+                </div>
+                <div class="chat-messages" id="phc-chat-messages">
+                    <div class="chat-message bot">
+                        <p>Hello! I'm here to help you. You can ask questions like:</p>
+                        <ul>
+                            <li>"What to do if a child has fever 102°F?"</li>
+                            <li>"When is the next vaccination camp?"</li>
+                            <li>"How to handle a high-risk pregnancy case?"</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <button class="voice-input-btn" id="phc-voice-btn">🎤</button>
+                    <input type="text" id="phc-chat-input" placeholder="Type your question...">
+                    <button class="send-btn" id="phc-send-btn">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/support.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>AshaConnect - Daily Checklist</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <button class="icon-btn back-btn" onclick="history.back()">
+                <span>←</span>
+            </button>
+            <span class="page-title">Daily Checklist</span>
+        </div>
+        <div class="top-bar-right">
+            <button class="icon-btn" id="notification-btn">
+                <span>🔔</span>
+                <span class="badge">3</span>
+            </button>
+            <button class="icon-btn" id="help-btn">
+                <span>❓</span>
+            </button>
+            <button class="icon-btn" id="language-btn">
+                <span>🌐</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="checklist-header">
+            <h2>Today's Field Visits</h2>
+            <div class="view-toggle">
+                <button class="toggle-btn active" data-view="list">📋 List</button>
+                <button class="toggle-btn" data-view="map">🗺️ Map</button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <select id="category-filter" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="pregnant">Pregnant</option>
+                <option value="child">Child</option>
+                <option value="chronic">Chronic Illness</option>
+                <option value="vaccination">Due Vaccination</option>
+            </select>
+            <button class="btn-secondary btn-sm" id="ai-route-btn">
+                <span>🤖</span> AI Route
+            </button>
+        </div>
+
+        <div id="list-view" class="checklist-view active">
+            <div class="task-list" id="task-list">
+                <!-- Tasks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div id="map-view" class="checklist-view">
+            <div class="map-container">
+                <div class="map-placeholder" id="map-placeholder">
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-marker pregnant"></span>
+                            <span>Pregnant</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker child"></span>
+                            <span>Child</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker high-risk"></span>
+                            <span>High Risk</span>
+                        </div>
+                    </div>
+                    <svg class="simple-map" viewBox="0 0 400 300" id="simple-map">
+                        <!-- Map markers will be added by JavaScript -->
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="checklist-summary">
+            <div class="summary-item">
+                <span class="summary-label">Total Tasks:</span>
+                <span class="summary-value" id="total-tasks">0</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Completed:</span>
+                <span class="summary-value" id="completed-tasks">0</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Remaining:</span>
+                <span class="summary-value" id="remaining-tasks">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Route Modal -->
+    <div class="modal" id="ai-route-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>AI Optimized Route</h3>
+                <button class="close-btn" id="close-route-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="route-info">
+                    <p>AshaAI has optimized your route for today's visits:</p>
+                    <div class="route-list" id="optimized-route-list"></div>
+                    <div class="route-stats">
+                        <div class="stat">
+                            <span>Estimated Time:</span>
+                            <strong id="route-time">-</strong>
+                        </div>
+                        <div class="stat">
+                            <span>Distance:</span>
+                            <strong id="route-distance">-</strong>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary btn-full" id="apply-route-btn">Apply Route</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/daily-checklist.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+</html>
+

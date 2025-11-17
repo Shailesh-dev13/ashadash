@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#2563eb">
+    <title>AshaConnect - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-icon-large">🏥</div>
+            <h1>AshaConnect</h1>
+            <p>Welcome back, ASHA Worker</p>
+        </div>
+
+        <div class="login-form-container">
+            <div id="mobile-step" class="login-step active">
+                <h2>Enter Mobile Number</h2>
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">📱</span>
+                        <input type="tel" id="mobile-input" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}">
+                    </div>
+                </div>
+                <button class="btn-primary btn-full" id="get-otp-btn">Get OTP</button>
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                <button class="btn-secondary btn-full" id="biometric-btn">
+                    <span class="btn-icon">👆</span>
+                    Login with Biometrics
+                </button>
+                <button class="btn-voice-assistant" id="voice-assistant-btn" title="Voice Assistant">
+                    <span>🎤</span>
+                </button>
+            </div>
+
+            <div id="otp-step" class="login-step">
+                <h2>Enter OTP</h2>
+                <p class="otp-info">OTP sent to <span id="mobile-display"></span></p>
+                <div class="otp-input-container">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]">
+                </div>
+                <button class="btn-link" id="resend-otp">Resend OTP</button>
+                <button class="btn-primary btn-full" id="verify-otp-btn">Verify OTP</button>
+                <button class="btn-secondary btn-full" id="back-to-mobile">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
+
