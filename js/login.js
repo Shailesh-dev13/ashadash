@@ -131,8 +131,8 @@ function validateMobile(mobile) {
 }
 
 function generateOTP() {
-    // Generate 6-digit OTP
-    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    // Fixed OTP for testing
+    generatedOTP = '451278';
     console.log('Generated OTP:', generatedOTP); // For testing purposes
     showToast(`OTP sent to ${mobileNumber}. OTP: ${generatedOTP}`, 'info');
 }
