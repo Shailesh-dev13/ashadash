@@ -170,6 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     updateUIText();
     
+    // Add logged-in class if user is logged in
+    const user = localStorage.getItem('asha_user');
+    if (user) {
+        document.body.classList.add('logged-in');
+    }
+    
     // Add online/offline listeners
     window.addEventListener('online', () => {
         showToast('Connection restored. Syncing data...', 'success');

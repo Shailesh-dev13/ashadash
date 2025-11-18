@@ -266,11 +266,11 @@
 
 .language-card {
     background-color: var(--white);
-    border: none;
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -280,8 +280,9 @@
 }
 
 .language-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .language-card:active {
@@ -646,11 +647,15 @@
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--light-grey);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
 }
 
 .notification-item:hover {
     background-color: var(--light-grey);
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .notification-item.unread {
@@ -747,6 +752,14 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.task-item:hover {
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .task-checkbox {
@@ -909,6 +922,14 @@
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-sm);
     text-align: center;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.support-card:hover {
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .card-icon-large {
@@ -1017,12 +1038,14 @@
     align-items: center;
     gap: var(--spacing-md);
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
 }
 
 .resource-item:hover {
-    transform: translateX(4px);
-    box-shadow: var(--shadow-md);
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .resource-icon {
@@ -1201,5 +1224,14 @@
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.notification-item:hover {
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 

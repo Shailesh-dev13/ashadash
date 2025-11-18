@@ -48,10 +48,15 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: var(--dark-grey);
-    background-color: var(--light-grey);
+    background-color: #f5f8fc;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+}
+
+/* Body background for logged-in pages */
+body.logged-in {
+    background-color: #f4f7fb;
 }
 
 /* Dark Mode */
@@ -90,15 +95,22 @@ a:hover {
 
 /* Top Bar */
 .top-bar {
-    background-color: var(--white);
+    background-color: #ffffff;
     padding: var(--spacing-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--shadow-sm);
+    border-bottom: 2px solid #d2d6df;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+}
+
+.top-bar .app-name,
+.top-bar .page-title {
+    color: #1a365d;
+    font-weight: 600;
 }
 
 .top-bar-left {
@@ -164,10 +176,12 @@ a:hover {
 
 /* Main Container */
 .main-container {
-    padding: var(--spacing-md);
+    padding: 16px;
     padding-bottom: calc(var(--spacing-xl) + 80px); /* Space for floating buttons */
     max-width: 100%;
     margin: 0 auto;
+    margin-top: 10px;
+    background-color: transparent;
 }
 
 /* Buttons */
@@ -300,6 +314,14 @@ a:hover {
     padding: var(--spacing-md);
     box-shadow: var(--shadow-sm);
     margin-bottom: var(--spacing-md);
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 /* Dashboard Grid */
@@ -316,7 +338,7 @@ a:hover {
     padding: var(--spacing-lg);
     text-align: center;
     box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    transition: all 0.2s ease-in-out;
     text-decoration: none;
     color: inherit;
     position: relative;
@@ -325,11 +347,13 @@ a:hover {
     align-items: center;
     gap: var(--spacing-sm);
     min-height: 140px;
+    border: 1px solid transparent;
 }
 
 .dashboard-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .card-icon {
@@ -378,6 +402,14 @@ a:hover {
     padding: var(--spacing-md);
     text-align: center;
     box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .stat-value {
@@ -488,6 +520,13 @@ a:hover {
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-md);
     box-shadow: var(--shadow-sm);
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-section:hover {
+    border: 2px solid #2b6cb0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-section h3 {
@@ -601,5 +640,22 @@ a:hover {
 
 .slide-in {
     animation: slideIn 0.3s ease;
+}
+
+/* Mobile Touch Support - Fallback for devices without hover */
+@media (hover: none) {
+    .dashboard-card:active,
+    .card:active,
+    .task-item:active,
+    .support-card:active,
+    .resource-item:active,
+    .stat-card:active,
+    .form-section:active,
+    .language-card:active,
+    .notification-item:active {
+        border: 2px solid #2b6cb0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+    }
 }
 
