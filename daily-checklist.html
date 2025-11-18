@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#2563eb">
     <title>AshaConnect - Daily Checklist</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/components.css">
 </head>
@@ -60,25 +61,25 @@
 
         <div id="map-view" class="checklist-view">
             <div class="map-container">
-                <div class="map-placeholder" id="map-placeholder">
-                    <div class="map-legend">
-                        <div class="legend-item">
-                            <span class="legend-marker pregnant"></span>
-                            <span>Pregnant</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-marker child"></span>
-                            <span>Child</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-marker high-risk"></span>
-                            <span>High Risk</span>
-                        </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-marker pregnant"></span>
+                        <span>Pregnant</span>
                     </div>
-                    <svg class="simple-map" viewBox="0 0 400 300" id="simple-map">
-                        <!-- Map markers will be added by JavaScript -->
-                    </svg>
+                    <div class="legend-item">
+                        <span class="legend-marker child"></span>
+                        <span>Child</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker chronic"></span>
+                        <span>Chronic</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker vaccination"></span>
+                        <span>Vaccination</span>
+                    </div>
                 </div>
+                <div id="map" style="height: 500px; width: 100%; border-radius: 8px; z-index: 1;"></div>
             </div>
         </div>
 
@@ -125,6 +126,7 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
     <script src="js/daily-checklist.js"></script>
     <script src="js/ai-assistant.js"></script>

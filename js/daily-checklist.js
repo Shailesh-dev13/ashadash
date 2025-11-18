@@ -2,7 +2,8 @@
 // Daily Checklist Logic
 // ============================================
 
-// Dummy task data
+// Dummy task data with real coordinates (spread out in different directions)
+// Coordinates are around a typical Indian city area, non-colinear
 const dummyTasks = [
     {
         id: 1,
@@ -13,7 +14,9 @@ const dummyTasks = [
         time: '09:00 AM',
         completed: false,
         patientType: 'Chronic Illness',
-        notes: 'Diabetes checkup'
+        notes: 'Diabetes checkup',
+        lat: 28.6139,
+        lng: 77.2090
     },
     {
         id: 2,
@@ -24,7 +27,9 @@ const dummyTasks = [
         time: '10:30 AM',
         completed: false,
         patientType: 'Pregnant - 7 months',
-        notes: 'Antenatal checkup'
+        notes: 'Antenatal checkup',
+        lat: 28.6250,
+        lng: 77.2150
     },
     {
         id: 3,
@@ -35,7 +40,9 @@ const dummyTasks = [
         time: '11:00 AM',
         completed: false,
         patientType: 'Child - 6 months',
-        notes: 'DPT vaccine due'
+        notes: 'DPT vaccine due',
+        lat: 28.6050,
+        lng: 77.2200
     },
     {
         id: 4,
@@ -46,7 +53,9 @@ const dummyTasks = [
         time: '02:00 PM',
         completed: false,
         patientType: 'Pregnant - 5 months',
-        notes: 'Regular checkup'
+        notes: 'Regular checkup',
+        lat: 28.6200,
+        lng: 77.2000
     },
     {
         id: 5,
@@ -57,7 +66,9 @@ const dummyTasks = [
         time: '03:30 PM',
         completed: false,
         patientType: 'Child - 2 years',
-        notes: 'Growth monitoring'
+        notes: 'Growth monitoring',
+        lat: 28.6100,
+        lng: 77.1950
     },
     {
         id: 6,
@@ -68,11 +79,15 @@ const dummyTasks = [
         time: '04:00 PM',
         completed: false,
         patientType: 'Hypertension',
-        notes: 'BP check'
+        notes: 'BP check',
+        lat: 28.6180,
+        lng: 77.2100
     }
 ];
 
 let tasks = [];
+let map = null;
+let markers = [];
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -149,10 +164,36 @@ function toggleTask(id) {
 }
 
 function showTaskOnMap(id) {
-    // Switch to map view and highlight task
+    // Switch to map view
     document.querySelector('.toggle-btn[data-view="map"]').click();
-    // In a real app, this would zoom to the location
-    showToast('Task location shown on map', 'info');
+    
+    // Wait for map to initialize, then zoom to task
+    setTimeout(() => {
+        if (map) {
+            const task = tasks.find(t => t.id === id);
+            if (task && task.lat && task.lng) {
+                map.setView([task.lat, task.lng], 16);
+                // Find and open the marker popup
+                const marker = markers.find(m => {
+                    const lat = m.getLatLng().lat;
+                    const lng = m.getLatLng().lng;
+                    return Math.abs(lat - task.lat) < 0.0001 && Math.abs(lng - task.lng) < 0.0001;
+                });
+                if (marker) {
+                    marker.openPopup();
+                }
+                showToast(`Showing location: ${task.title}`, 'info');
+            }
+        } else {
+            // Map not initialized yet, initialize it
+            if (typeof L !== 'undefined') {
+                setTimeout(() => {
+                    initMap();
+                    setTimeout(() => showTaskOnMap(id), 200);
+                }, 100);
+            }
+        }
+    }, 300);
 }
 
 function initViewToggle() {
@@ -169,7 +210,14 @@ function initViewToggle() {
             document.getElementById(`${view}-view`).classList.add('active');
             
             if (view === 'map') {
-                renderMap();
+                // Initialize map if not already initialized
+                if (!map && typeof L !== 'undefined') {
+                    setTimeout(() => {
+                        initMap();
+                    }, 100);
+                } else {
+                    renderMap();
+                }
             }
         });
     });
@@ -178,40 +226,96 @@ function initViewToggle() {
 function initFilters() {
     document.getElementById('category-filter')?.addEventListener('change', () => {
         renderTasks();
+        // Update map markers when filter changes
+        if (map) {
+            renderMap();
+        }
     });
 }
 
 function initMap() {
-    // Map will be rendered when map view is selected
+    // Initialize Leaflet map when map view is selected
+    if (document.getElementById('map') && typeof L !== 'undefined') {
+        // Center map around the task locations (average coordinates)
+        const centerLat = 28.6150;
+        const centerLng = 77.2080;
+        
+        // Create map
+        map = L.map('map').setView([centerLat, centerLng], 14);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+        
+        // Render markers
+        renderMap();
+    }
 }
 
 function renderMap() {
-    const svg = document.getElementById('simple-map');
-    if (!svg) return;
+    if (!map) {
+        // Map not initialized yet, will be initialized when view is switched
+        return;
+    }
     
     // Clear existing markers
-    svg.innerHTML = '';
+    markers.forEach(marker => map.removeLayer(marker));
+    markers = [];
+    
+    // Filter tasks based on category filter
+    const categoryFilter = document.getElementById('category-filter')?.value || 'all';
+    const filteredTasks = categoryFilter === 'all' 
+        ? tasks.filter(t => !t.completed)
+        : tasks.filter(t => !t.completed && t.category === categoryFilter);
+    
+    if (filteredTasks.length === 0) {
+        return;
+    }
     
     // Add markers for each task
-    tasks.forEach((task, index) => {
-        const x = 50 + (index % 4) * 90;
-        const y = 50 + Math.floor(index / 4) * 80;
+    filteredTasks.forEach((task) => {
+        if (!task.lat || !task.lng) {
+            // Skip tasks without coordinates
+            return;
+        }
         
-        const marker = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        marker.setAttribute('cx', x);
-        marker.setAttribute('cy', y);
-        marker.setAttribute('r', 8);
-        marker.setAttribute('fill', getCategoryColor(task.category));
-        marker.setAttribute('class', 'map-marker');
-        marker.setAttribute('data-id', task.id);
-        marker.setAttribute('title', task.title);
+        // Create custom icon based on category
+        const iconColor = getCategoryColor(task.category);
+        const customIcon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background-color: ${iconColor}; width: 24px; height: 24px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;">${getCategoryIcon(task.category)}</div>`,
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
         
-        marker.addEventListener('click', () => {
+        // Create marker
+        const marker = L.marker([task.lat, task.lng], { icon: customIcon })
+            .addTo(map)
+            .bindPopup(`
+                <div style="min-width: 200px;">
+                    <strong>${task.title}</strong><br>
+                    <small>${task.patientType}</small><br>
+                    <small>📍 ${task.address}</small><br>
+                    <small>🕐 ${task.time}</small><br>
+                    ${task.priority === 'high' ? '<span style="color: red; font-weight: bold;">High Priority</span>' : ''}
+                </div>
+            `);
+        
+        // Add click handler
+        marker.on('click', () => {
             showToast(`Task: ${task.title}`, 'info');
         });
         
-        svg.appendChild(marker);
+        markers.push(marker);
     });
+    
+    // Fit map to show all markers
+    if (markers.length > 0) {
+        const group = new L.featureGroup(markers);
+        map.fitBounds(group.getBounds().pad(0.1));
+    }
 }
 
 function getCategoryColor(category) {
@@ -223,6 +327,16 @@ function getCategoryColor(category) {
         'high-risk': '#ef4444'
     };
     return colors[category] || '#6b7280';
+}
+
+function getCategoryIcon(category) {
+    const icons = {
+        pregnant: '🤰',
+        child: '👶',
+        chronic: '🏥',
+        vaccination: '💉'
+    };
+    return icons[category] || '📍';
 }
 
 function updateSummary() {
