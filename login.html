@@ -17,6 +17,20 @@
         </div>
 
         <div class="login-form-container">
+            <!-- Login Method Tabs -->
+            <div class="login-tabs">
+                <button class="login-tab-btn active" data-method="mobile">
+                    <span>📱</span> Mobile/OTP
+                </button>
+                <button class="login-tab-btn" data-method="abha">
+                    <span>🆔</span> ABHA ID
+                </button>
+                <button class="login-tab-btn" data-method="biometric">
+                    <span>👆</span> Biometric
+                </button>
+            </div>
+
+            <!-- Mobile/OTP Login Step -->
             <div id="mobile-step" class="login-step active">
                 <h2>Enter Mobile Number</h2>
                 <div class="input-group">
@@ -27,18 +41,12 @@
                     </div>
                 </div>
                 <button class="btn-primary btn-full" id="get-otp-btn">Get OTP</button>
-                <div class="divider">
-                    <span>OR</span>
-                </div>
-                <button class="btn-secondary btn-full" id="biometric-btn">
-                    <span class="btn-icon">👆</span>
-                    Login with Biometrics
-                </button>
                 <button class="btn-voice-assistant" id="voice-assistant-btn" title="Voice Assistant">
                     <span>🎤</span>
                 </button>
             </div>
 
+            <!-- OTP Verification Step -->
             <div id="otp-step" class="login-step">
                 <h2>Enter OTP</h2>
                 <p class="otp-info">OTP sent to <span id="mobile-display"></span></p>
@@ -53,6 +61,43 @@
                 <button class="btn-link" id="resend-otp">Resend OTP</button>
                 <button class="btn-primary btn-full" id="verify-otp-btn">Verify OTP</button>
                 <button class="btn-secondary btn-full" id="back-to-mobile">Back</button>
+            </div>
+
+            <!-- ABHA ID Login Step -->
+            <div id="abha-step" class="login-step">
+                <h2>Login with ABHA ID</h2>
+                <p class="login-subtitle">Enter your Ayushman Bharat Health Account ID</p>
+                <div class="input-group">
+                    <label>ABHA ID / ABHA Number</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">🆔</span>
+                        <input type="text" id="abha-input" placeholder="e.g., 12-3456-7890-1234 or 12345678901234" pattern="[0-9-]+">
+                    </div>
+                    <small class="input-hint">Enter your 14-digit ABHA number (with or without hyphens)</small>
+                </div>
+                <div class="input-group">
+                    <label>Password / PIN</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="abha-password" placeholder="Enter your password" maxlength="20">
+                    </div>
+                </div>
+                <button class="btn-primary btn-full" id="login-abha-btn">Login with ABHA</button>
+                <button class="btn-link" id="forgot-abha-password">Forgot Password?</button>
+            </div>
+
+            <!-- Biometric Login Step -->
+            <div id="biometric-step" class="login-step">
+                <div class="biometric-login-content">
+                    <div class="biometric-icon-large">👆</div>
+                    <h2>Biometric Authentication</h2>
+                    <p class="login-subtitle">Use your fingerprint or face recognition to login</p>
+                    <button class="btn-primary btn-full btn-large" id="biometric-btn">
+                        <span class="btn-icon">👆</span>
+                        Authenticate with Biometrics
+                    </button>
+                    <p class="biometric-info">Make sure biometric authentication is enabled on your device</p>
+                </div>
             </div>
         </div>
     </div>

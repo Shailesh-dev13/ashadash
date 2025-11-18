@@ -142,6 +142,47 @@
     position: relative;
 }
 
+/* Login Tabs */
+.login-tabs {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--light-grey);
+    padding-bottom: var(--spacing-xs);
+}
+
+.login-tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--grey);
+    font-weight: 500;
+}
+
+.login-tab-btn span {
+    font-size: 1.25rem;
+}
+
+.login-tab-btn.active {
+    color: var(--primary-blue);
+    background-color: rgba(37, 99, 235, 0.1);
+    font-weight: 600;
+}
+
+.login-tab-btn:hover:not(.active) {
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+}
+
 .login-step {
     display: none;
 }
@@ -149,6 +190,45 @@
 .login-step.active {
     display: block;
     animation: fadeIn 0.3s ease;
+}
+
+.login-subtitle {
+    color: var(--grey);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+}
+
+.input-hint {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: 0.75rem;
+    color: var(--grey);
+    font-style: italic;
+}
+
+/* Biometric Login Content */
+.biometric-login-content {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+}
+
+.biometric-icon-large {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.biometric-info {
+    margin-top: var(--spacing-md);
+    font-size: 0.875rem;
+    color: var(--grey);
+    font-style: italic;
+}
+
+.btn-large {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1.125rem;
+    min-height: 56px;
 }
 
 .divider {
