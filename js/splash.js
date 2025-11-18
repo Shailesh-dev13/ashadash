@@ -50,6 +50,24 @@ function rotateTips() {
     }
 }
 
+function skipSplash() {
+    // Clear the interval
+    if (tipInterval) {
+        clearInterval(tipInterval);
+    }
+    
+    // Check if user is logged in
+    const user = localStorage.getItem('asha_user');
+    if (user) {
+        window.location.href = 'dashboard.html';
+    } else {
+        window.location.href = 'login.html';
+    }
+}
+
+// Make skipSplash globally available
+window.skipSplash = skipSplash;
+
 // Initialize on page load
 if (document.querySelector('.splash-container')) {
     initSplash();
