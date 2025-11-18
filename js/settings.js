@@ -22,8 +22,8 @@ function loadSettings() {
     document.getElementById('current-language').textContent = langNames[lang] || 'English';
     
     // Load theme
-    const theme = localStorage.getItem('asha_theme') || 'light';
-    document.getElementById('current-theme').textContent = theme === 'dark' ? 'Dark' : 'Light';
+    const theme = localStorage.getItem('asha_theme') || 'light-mode';
+    document.getElementById('current-theme').textContent = theme === 'dark-mode' ? 'Dark' : 'Light';
     
     // Load offline queue count
     const queue = JSON.parse(localStorage.getItem('asha_offline_queue') || '[]');

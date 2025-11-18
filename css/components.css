@@ -265,12 +265,10 @@
 }
 
 .language-card {
-    background-color: var(--white);
-    border: 1px solid transparent;
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -279,9 +277,27 @@
     min-height: 120px;
 }
 
-.language-card:hover {
+/* Light Mode Language Cards */
+body.light-mode .language-card {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .language-card:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Language Cards */
+body.dark-mode .language-card {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .language-card:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -647,15 +663,27 @@
     padding: var(--spacing-md);
     border-bottom: 1px solid var(--light-grey);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
 }
 
-.notification-item:hover {
+/* Light Mode Notification Items */
+body.light-mode .notification-item:hover {
     background-color: var(--light-grey);
     border: 2px solid #2b6cb0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Notification Items */
+body.dark-mode .notification-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .notification-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 8px rgba(120, 165, 255, 0.2);
 }
 
 .notification-item.unread {
@@ -745,20 +773,36 @@
 }
 
 .task-item {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-    border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
 }
 
-.task-item:hover {
+/* Light Mode Task Items */
+body.light-mode .task-item {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .task-item:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Task Items */
+body.dark-mode .task-item {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .task-item:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -917,18 +961,34 @@
 }
 
 .support-card {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-sm);
     text-align: center;
-    border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
 }
 
-.support-card:hover {
+/* Light Mode Support Cards */
+body.light-mode .support-card {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .support-card:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Support Cards */
+body.dark-mode .support-card {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .support-card:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -1030,7 +1090,6 @@
 }
 
 .resource-item {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-sm);
@@ -1038,13 +1097,30 @@
     align-items: center;
     gap: var(--spacing-md);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
+}
+
+/* Light Mode Resource Items */
+body.light-mode .resource-item {
+    background-color: var(--white);
     border: 1px solid transparent;
 }
 
-.resource-item:hover {
+body.light-mode .resource-item:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Resource Items */
+body.dark-mode .resource-item {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .resource-item:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -1220,18 +1296,34 @@
 
 .notification-item {
     position: relative;
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-sm);
-    border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
     cursor: pointer;
 }
 
-.notification-item:hover {
+/* Light Mode Notification Items (List View) */
+body.light-mode .notification-item {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .notification-item:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Dark Mode Notification Items (List View) */
+body.dark-mode .notification-item {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .notification-item:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-2px);
 }
 

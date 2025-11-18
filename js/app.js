@@ -64,18 +64,31 @@ function updateUIText() {
 
 // Theme management
 function initTheme() {
-    const theme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light';
-    if (theme === 'dark') {
-        document.body.classList.add('dark-mode');
-        const toggle = document.getElementById('dark-mode-toggle');
-        if (toggle) toggle.checked = true;
+    const theme = localStorage.getItem(STORAGE_KEYS.THEME) || 'light-mode';
+    // Remove any existing theme classes
+    document.body.classList.remove('light-mode', 'dark-mode');
+    // Add the saved theme or default to light-mode
+    document.body.classList.add(theme);
+    
+    // Update toggle switch if present
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (toggle) {
+        toggle.checked = theme === 'dark-mode';
     }
 }
 
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-    const isDark = document.body.classList.contains('dark-mode');
-    localStorage.setItem(STORAGE_KEYS.THEME, isDark ? 'dark' : 'light');
+    const body = document.body;
+    
+    if (body.classList.contains('dark-mode')) {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        localStorage.setItem(STORAGE_KEYS.THEME, 'light-mode');
+    } else {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        localStorage.setItem(STORAGE_KEYS.THEME, 'dark-mode');
+    }
 }
 
 // Navigation helper
@@ -167,6 +180,7 @@ function isOnline() {
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize theme first (ensures body has light-mode or dark-mode class)
     initTheme();
     updateUIText();
     

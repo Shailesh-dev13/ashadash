@@ -52,10 +52,16 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+/* Light Mode - Default */
+body.light-mode {
+    background-color: #f4f7fb;
 }
 
 /* Body background for logged-in pages */
-body.logged-in {
+body.logged-in.light-mode {
     background-color: #f4f7fb;
 }
 
@@ -64,8 +70,12 @@ body.dark-mode {
     --light-grey: #1f2937;
     --white: #111827;
     --dark-grey: #f3f4f6;
-    background-color: var(--white);
+    background-color: #0f1012;
     color: var(--dark-grey);
+}
+
+body.logged-in.dark-mode {
+    background-color: #0f1012;
 }
 
 /* Typography */
@@ -95,21 +105,41 @@ a:hover {
 
 /* Top Bar */
 .top-bar {
-    background-color: #ffffff;
     padding: var(--spacing-md);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #d2d6df;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
 }
 
-.top-bar .app-name,
-.top-bar .page-title {
+/* Light Mode Navbar */
+body.light-mode .top-bar {
+    background-color: #ffffff;
     color: #1a365d;
+    border-bottom: 2px solid #d2d6df;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .top-bar .app-name,
+body.light-mode .top-bar .page-title {
+    color: #1a365d;
+    font-weight: 600;
+}
+
+/* Dark Mode Navbar */
+body.dark-mode .top-bar {
+    background-color: #16171a;
+    color: #e5e7eb;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .top-bar .app-name,
+body.dark-mode .top-bar .page-title {
+    color: #e5e7eb;
     font-weight: 600;
 }
 
@@ -309,18 +339,34 @@ a:hover {
 
 /* Cards */
 .card {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     box-shadow: var(--shadow-sm);
     margin-bottom: var(--spacing-md);
-    border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
 }
 
-.card:hover {
+/* Light Mode Cards */
+body.light-mode .card {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .card:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Cards */
+body.dark-mode .card {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .card:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -333,12 +379,11 @@ a:hover {
 }
 
 .dashboard-card {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     text-align: center;
     box-shadow: var(--shadow-sm);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
     text-decoration: none;
     color: inherit;
     position: relative;
@@ -347,12 +392,30 @@ a:hover {
     align-items: center;
     gap: var(--spacing-sm);
     min-height: 140px;
+}
+
+/* Light Mode Cards */
+body.light-mode .dashboard-card {
+    background-color: var(--white);
     border: 1px solid transparent;
 }
 
-.dashboard-card:hover {
+body.light-mode .dashboard-card:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Card Borders */
+body.dark-mode .dashboard-card {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Hover effect in Dark Mode */
+body.dark-mode .dashboard-card:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -397,18 +460,34 @@ a:hover {
 }
 
 .stat-card {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     text-align: center;
     box-shadow: var(--shadow-sm);
-    border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
 }
 
-.stat-card:hover {
+/* Light Mode Stat Cards */
+body.light-mode .stat-card {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .stat-card:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Dark Mode Stat Cards */
+body.dark-mode .stat-card {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .stat-card:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
     transform: translateY(-3px);
 }
 
@@ -515,18 +594,33 @@ a:hover {
 
 /* Form Sections */
 .form-section {
-    background-color: var(--white);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-md);
     box-shadow: var(--shadow-sm);
-    border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background 0.3s ease, border 0.3s ease;
 }
 
-.form-section:hover {
+/* Light Mode Form Sections */
+body.light-mode .form-section {
+    background-color: var(--white);
+    border: 1px solid transparent;
+}
+
+body.light-mode .form-section:hover {
     border: 2px solid #2b6cb0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Form Sections */
+body.dark-mode .form-section {
+    background-color: #1e1f23;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .form-section:hover {
+    border: 2px solid rgba(120, 165, 255, 0.6);
+    box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
 }
 
 .form-section h3 {
@@ -644,17 +738,33 @@ a:hover {
 
 /* Mobile Touch Support - Fallback for devices without hover */
 @media (hover: none) {
-    .dashboard-card:active,
-    .card:active,
-    .task-item:active,
-    .support-card:active,
-    .resource-item:active,
-    .stat-card:active,
-    .form-section:active,
-    .language-card:active,
-    .notification-item:active {
+    /* Light Mode Active States */
+    body.light-mode .dashboard-card:active,
+    body.light-mode .card:active,
+    body.light-mode .task-item:active,
+    body.light-mode .support-card:active,
+    body.light-mode .resource-item:active,
+    body.light-mode .stat-card:active,
+    body.light-mode .form-section:active,
+    body.light-mode .language-card:active,
+    body.light-mode .notification-item:active {
         border: 2px solid #2b6cb0;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+    }
+    
+    /* Dark Mode Active States */
+    body.dark-mode .dashboard-card:active,
+    body.dark-mode .card:active,
+    body.dark-mode .task-item:active,
+    body.dark-mode .support-card:active,
+    body.dark-mode .resource-item:active,
+    body.dark-mode .stat-card:active,
+    body.dark-mode .form-section:active,
+    body.dark-mode .language-card:active,
+    body.dark-mode .notification-item:active {
+        border: 2px solid rgba(120, 165, 255, 0.6);
+        box-shadow: 0 0 10px rgba(120, 165, 255, 0.2);
         transform: translateY(-3px);
     }
 }
